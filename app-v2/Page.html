@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: 'Google Sans', Arial, sans-serif;
+        padding: 20px;
+        background-color: #f8f9fa;
+        margin: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      }
+      h2 {
+        color: #202124;
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+      .form-group {
+        margin-bottom: 24px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #202124;
+      }
+      .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .checkbox-item label {
+        margin-bottom: 0;
+        font-weight: normal;
+      }
+      .success {
+        color: #0f9d58;
+        padding: 12px;
+        background-color: #e6f4ea;
+        border-radius: 4px;
+        margin-top: 12px;
+      }
+      .error {
+        color: #d93025;
+        padding: 12px;
+        background-color: #fce8e6;
+        border-radius: 4px;
+        margin-top: 12px;
+      }
+      button {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        margin-right: 12px;
+        transition: background-color 0.2s;
+      }
+      button:hover {
+        background-color: #1557b0;
+      }
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      button[type="button"] {
+        background-color: #fff;
+        color: #1a73e8;
+        border: 1px solid #1a73e8;
+      }
+      button[type="button"]:hover {
+        background-color: #f1f3f4;
+      }
+      .folder-inputs {
+        margin-bottom: 12px;
+      }
+      .folder-input-group {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 8px;
+        align-items: center;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #1a73e8;
+      }
+      small {
+        color: #5f6368;
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+      }
+      .radio-group {
+        margin-top: 8px;
+      }
+      .radio-item {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      input[type="radio"], input[type="checkbox"] {
+        margin: 0;
+      }
+      .remove-folder {
+        background-color: #fff;
+        color: #d93025;
+        border: 1px solid #d93025;
+        padding: 6px 12px;
+        margin: 0;
+      }
+      .remove-folder:hover {
+        background-color: #fce8e6;
+      }
+      .add-folder {
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Folder Scaffolding Generator</h2>
+      <form id="folderForm">
+        <div class="form-group">
+          <label>Target Folders (up to 10):</label>
+          <div id="folderInputs" class="folder-inputs">
+            <div class="folder-input-group">
+              <input type="text" class="folder-url" required>
+              <button type="button" class="remove-folder" style="display: none;">Remove</button>
+            </div>
+          </div>
+          <button type="button" id="addFolderBtn" class="add-folder">Add Another Folder</button>
+          <small>Paste Google Drive folder URLs here</small>
+        </div>
+        
+        <div class="form-group">
+          <label>Select Years:</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2020" id="year2020">
+              <label for="year2020">2020</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2021" id="year2021">
+              <label for="year2021">2021</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2022" id="year2022">
+              <label for="year2022">2022</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2023" id="year2023">
+              <label for="year2023">2023</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2024" id="year2024">
+              <label for="year2024">2024</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2025" id="year2025">
+              <label for="year2025">2025</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2026" id="year2026">
+              <label for="year2026">2026</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2027" id="year2027">
+              <label for="year2027">2027</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2028" id="year2028">
+              <label for="year2028">2028</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2029" id="year2029">
+              <label for="year2029">2029</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Month Format:</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="monthFormat" value="numeric" id="numericFormat" checked>
+              <label for="numericFormat">Numeric (01, 02, ...)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="monthFormat" value="named" id="namedFormat">
+              <label for="namedFormat">Named (01_Jan, 02_Feb, ...)</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" id="generateBtn">Generate Folder Scaffolding</button>
+          <button type="button" id="resetBtn">Reset</button>
+        </div>
+        
+        <div id="status"></div>
+      </form>
+    </div>
+    
+    <script>
+      // Handle adding/removing folder inputs
+      const folderInputs = document.getElementById('folderInputs');
+      const addFolderBtn = document.getElementById('addFolderBtn');
+      
+      function createFolderInput() {
+        const group = document.createElement('div');
+        group.className = 'folder-input-group';
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'folder-url';
+        input.required = true;
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'remove-folder';
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = function() {
+          group.remove();
+          updateFolderControls();
+        };
+        
+        group.appendChild(input);
+        group.appendChild(removeBtn);
+        folderInputs.appendChild(group);
+        
+        updateFolderControls();
+      }
+      
+      function updateFolderControls() {
+        const folderCount = folderInputs.children.length;
+        addFolderBtn.style.display = folderCount >= 10 ? 'none' : 'inline-block';
+        
+        // Show/hide remove buttons based on folder count
+        Array.from(folderInputs.children).forEach(group => {
+          const removeBtn = group.querySelector('.remove-folder');
+          removeBtn.style.display = folderCount > 1 ? 'inline-block' : 'none';
+        });
+      }
+      
+      addFolderBtn.onclick = createFolderInput;
+      
+      document.getElementById('folderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+          targetFolders: Array.from(document.querySelectorAll('.folder-url'))
+                             .map(input => input.value),
+          years: Array.from(document.querySelectorAll('input[name="years"]:checked'))
+                     .map(cb => cb.value),
+          monthFormat: document.querySelector('input[name="monthFormat"]:checked').value
+        };
+        
+        // Validate
+        if (formData.targetFolders.some(url => !url)) {
+          showStatus('Please enter all target folder URLs.', false);
+          return;
+        }
+        
+        if (formData.years.length === 0) {
+          showStatus('Please select at least one year.', false);
+          return;
+        }
+        
+        // Disable button and show progress
+        const generateBtn = document.getElementById('generateBtn');
+        generateBtn.disabled = true;
+        showStatus('Creating folders... Please wait...', null);
+        
+        // Call server function
+        google.script.run
+          .withSuccessHandler(function(result) {
+            generateBtn.disabled = false;
+            showStatus(result.message, result.success);
+            if (result.success) {
+              // Optional: Clear form on success
+              // document.getElementById('folderForm').reset();
+            }
+          })
+          .withFailureHandler(function(error) {
+            generateBtn.disabled = false;
+            showStatus('Error: ' + error.toString(), false);
+          })
+          .createFolderStructure(formData);
+      });
+      
+      document.getElementById('resetBtn').addEventListener('click', function() {
+        document.getElementById('folderForm').reset();
+        document.getElementById('status').innerHTML = '';
+        // Reset folder inputs to single input
+        folderInputs.innerHTML = '';
+        createFolderInput();
+      });
+      
+      function showStatus(message, success) {
+        const statusDiv = document.getElementById('status');
+        statusDiv.innerHTML = message;
+        if (success === null) {
+          statusDiv.className = '';
+        } else {
+          statusDiv.className = success ? 'success' : 'error';
+        }
+      }
+      
+      // Initialize with one folder input
+      createFolderInput();
+    </script>
+  </body>
+</html>
