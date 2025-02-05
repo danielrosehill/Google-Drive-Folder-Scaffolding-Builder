@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: 'Google Sans', Arial, sans-serif;
+        padding: 20px;
+        background-color: #f8f9fa;
+        margin: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      }
+      h2 {
+        color: #202124;
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+      .form-group {
+        margin-bottom: 24px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #202124;
+      }
+      .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .checkbox-item label {
+        margin-bottom: 0;
+        font-weight: normal;
+      }
+      .success {
+        color: #0f9d58;
+        padding: 12px;
+        background-color: #e6f4ea;
+        border-radius: 4px;
+        margin-top: 12px;
+      }
+      .error {
+        color: #d93025;
+        padding: 12px;
+        background-color: #fce8e6;
+        border-radius: 4px;
+        margin-top: 12px;
+      }
+      button {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        margin-right: 12px;
+        transition: background-color 0.2s;
+      }
+      button:hover {
+        background-color: #1557b0;
+      }
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      button[type="button"] {
+        background-color: #fff;
+        color: #1a73e8;
+        border: 1px solid #1a73e8;
+      }
+      button[type="button"]:hover {
+        background-color: #f1f3f4;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #1a73e8;
+      }
+      small {
+        color: #5f6368;
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+      }
+      .radio-group {
+        margin-top: 8px;
+      }
+      .radio-item {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      input[type="radio"], input[type="checkbox"] {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Folder Scaffolding Generator</h2>
+      <form id="folderForm">
+        <div class="form-group">
+          <label>Target Folder URL:</label>
+          <input type="text" id="targetFolder" required>
+          <small>Paste Google Drive folder URL here</small>
+        </div>
+        
+        <div class="form-group">
+          <label>Select Years:</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2023" id="year2023">
+              <label for="year2023">2023</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2024" id="year2024">
+              <label for="year2024">2024</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2025" id="year2025">
+              <label for="year2025">2025</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2026" id="year2026">
+              <label for="year2026">2026</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2027" id="year2027">
+              <label for="year2027">2027</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2028" id="year2028">
+              <label for="year2028">2028</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2029" id="year2029">
+              <label for="year2029">2029</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="years" value="2030" id="year2030">
+              <label for="year2030">2030</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Month Format:</label>
+          <div class="radio-group">
+            <div class="radio-item">
+              <input type="radio" name="monthFormat" value="numeric" id="numericFormat" checked>
+              <label for="numericFormat">Numeric (01, 02, ...)</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="monthFormat" value="named" id="namedFormat">
+              <label for="namedFormat">Named (01_Jan, 02_Feb, ...)</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" id="generateBtn">Generate Folder Scaffolding</button>
+          <button type="button" id="resetBtn">Reset</button>
+        </div>
+        
+        <div id="status"></div>
+      </form>
+    </div>
+    
+    <script>
+      document.getElementById('folderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+          targetFolder: document.getElementById('targetFolder').value,
+          years: Array.from(document.querySelectorAll('input[name="years"]:checked'))
+                       .map(cb => cb.value),
+          monthFormat: document.querySelector('input[name="monthFormat"]:checked').value
+        };
+        
+        // Validate
+        if (!formData.targetFolder) {
+          showStatus('Please enter a target folder URL.', false);
+          return;
+        }
+        
+        if (formData.years.length === 0) {
+          showStatus('Please select at least one year.', false);
+          return;
+        }
+        
+        // Disable button and show progress
+        const generateBtn = document.getElementById('generateBtn');
+        generateBtn.disabled = true;
+        showStatus('Creating folders... Please wait...', null);
+        
+        // Call server function
+        google.script.run
+          .withSuccessHandler(function(result) {
+            generateBtn.disabled = false;
+            showStatus(result.message, result.success);
+            if (result.success) {
+              // Optional: Clear form on success
+              // document.getElementById('folderForm').reset();
+            }
+          })
+          .withFailureHandler(function(error) {
+            generateBtn.disabled = false;
+            showStatus('Error: ' + error.toString(), false);
+          })
+          .createFolderStructure(formData);
+      });
+      
+      document.getElementById('resetBtn').addEventListener('click', function() {
+        document.getElementById('folderForm').reset();
+        document.getElementById('status').innerHTML = '';
+      });
+      
+      function showStatus(message, success) {
+        const statusDiv = document.getElementById('status');
+        statusDiv.innerHTML = message;
+        if (success === null) {
+          statusDiv.className = '';
+        } else {
+          statusDiv.className = success ? 'success' : 'error';
+        }
+      }
+    </script>
+  </body>
+</html>
