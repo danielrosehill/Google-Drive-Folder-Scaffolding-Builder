@@ -1,7 +1,14 @@
 # Google Drive Date/Year Folder Generation (Apps Script)
 
-![alt text](screenshots/3.png)
+## Multiple Targets Version (App, V2)
 
+![alt text](screenshots/5.png)
+
+## Single Target Version (App, V1)
+
+![alt text](screenshots/4.png)
+
+## UI / Operation
 
 ![alt text](screenshots/1.png)
  ![alt text](screenshots/2.png)
